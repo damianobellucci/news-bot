@@ -5,4 +5,4 @@ starttime = time.time()
 
 while True:
     send_messages()
-    time.sleep(4)
+    time.sleep(60)

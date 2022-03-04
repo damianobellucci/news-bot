@@ -1,9 +1,10 @@
 import json
+from os import times
 from bs4 import BeautifulSoup
 import requests
 import unidecode
 import json
-
+import pandas as pd
 
 def scrape():
 
@@ -19,7 +20,7 @@ def scrape():
 
     #foreach article id->info
     hashmap = dict()
-
+    list = []
 
 
     for block in blocks:
@@ -28,6 +29,22 @@ def scrape():
         id  = soup.section['id']
         
         article = soup.find("div", {"class": "lb-body"})
+
+        #timestamp of article
+        time = soup.find("time")['datetime']
+        #converting in Rome time zone
+        time= pd.to_datetime(time)+ pd.Timedelta(hours=1)
+        timestamp = time.timestamp()
+        time = ','.join(str(x) for x in [time.month,time.day,time.hour,time.minute])
+
+
+
+        #eliminate empty div
+        for child in article.find_all(["div"]):
+            soup = BeautifulSoup(str(child), 'html.parser')
+            if not len(soup.text):
+                child.decompose()
+
         
         try:
             if(article.h2!=None):
@@ -56,11 +73,12 @@ def scrape():
             #article could be without body
             body=None
         
-        hashmap[id]={'title':title,'body':body}
+        #hashmap[id]={'title':title,'body':body}
+        list.append({'title':title,'body':body,'time':time,'timestamp':timestamp})
 
 
-    json_hasmap = json.dumps(hashmap,indent=4)
-    return json_hasmap
+    #json_hasmap = json.dumps(hashmap,indent=4)
+    return list
 
 '''
 obj = open('../data/data.json', 'w')
