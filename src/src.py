@@ -18,6 +18,7 @@ blocks = soup.find_all("section", {"class": "lb-post lb-type-HTML lb-tagName-"})
 hashmap = dict()
 
 
+
 for block in blocks:
     soup = BeautifulSoup(str(block), 'html.parser')
     
