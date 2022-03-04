@@ -23,3 +23,5 @@ def send_messages():
         #send in timestamp order
         time.sleep(0.5)
         requests.get(url+message)
+
+#test
