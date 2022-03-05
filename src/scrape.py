@@ -54,7 +54,7 @@ def scrape():
             title = unidecode.unidecode(title)
         #some blocks in starting html could have class of articles
         except: 
-            title=None
+            title='None title'
             break
 
         try:
@@ -71,7 +71,7 @@ def scrape():
             body = unidecode.unidecode(body)    
         except:
             #article could be without body
-            body=None
+            body='None body'
         
         #hashmap[id]={'title':title,'body':body}
         list.append({'title':title,'body':body,'time':time,'timestamp':timestamp})
