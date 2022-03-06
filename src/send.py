@@ -15,7 +15,10 @@ def send_messages(messages):
     url = "https://api.telegram.org/bot"+token+"/sendMessage?chat_id=@"+channel_id+"&text="
 
     for el in messages:
-        message =+el['time']+"\n\n" +el['title']+'\n\n'+el['body']
+        #info_time = el['time']
+        # text_time = "Data: "+str(info_time['month'])+"/"+str(info_time['day'])+" - Orario: "+str(info_time['hour'])+":"+str(info_time['minute'])
+        
+        message =el['time_string']+"\n\n" +el['title']+'\n\n'+el['body']
 
         #sending messages to group
         requests.get(url+message)

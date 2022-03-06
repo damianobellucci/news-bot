@@ -1,8 +1,15 @@
 from bs4 import BeautifulSoup
 import requests
 import unidecode
-from datetime import datetime
+from datetime import datetime, timedelta
 from build_url import build_url
+
+def format_time(string_time):
+    info_time  = string_time
+    info_time = info_time[:-5]
+    date = info_time[:-9]
+    final_time = date + " - " + info_time[len(info_time)-8:]
+    return final_time
 
 def scrape():
 
@@ -30,12 +37,14 @@ def scrape():
         time = soup.find("time")['datetime'][:-5]
 
         time = datetime.strptime(time, '%Y-%m-%dT%H:%M:%S')
+        time= time + timedelta(hours = 1)
 
-        timestamp = datetime.timestamp(time)
+        time_string = format_time(time.ctime())
         
-
+        timestamp = datetime.timestamp(time)
+    
      
-        #time = {"month":time.month,"day":time.day,"hour":time.hour,"minute":time.minute,"second":time.second}
+        time = {"month":time.month,"day":time.day,"hour":time.hour,"minute":time.minute,"second":time.second}
 
         #eliminate empty div
         for child in article.find_all(["div"]):
@@ -71,6 +80,6 @@ def scrape():
             #article could be without body
             body='None body'
 
-        list.append({'title':title,'body':body,'time':time.ctime(),'timestamp':timestamp})
+        list.append({'title':title,'body':body,'time':time,'time_string':time_string,'timestamp':timestamp})
     return list
     
