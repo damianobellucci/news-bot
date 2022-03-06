@@ -32,9 +32,10 @@ def scrape():
         time = datetime.strptime(time, '%Y-%m-%dT%H:%M:%S')
 
         timestamp = datetime.timestamp(time)
+        
 
      
-        time = {"month":time.month,"day":time.day,"hour":time.hour,"minute":time.minute,"second":time.second}
+        #time = {"month":time.month,"day":time.day,"hour":time.hour,"minute":time.minute,"second":time.second}
 
         #eliminate empty div
         for child in article.find_all(["div"]):
@@ -70,6 +71,6 @@ def scrape():
             #article could be without body
             body='None body'
 
-        list.append({'title':title,'body':body,'time':time,'timestamp':timestamp})
+        list.append({'title':title,'body':body,'time':time.ctime(),'timestamp':timestamp})
     return list
     

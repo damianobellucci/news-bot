@@ -15,7 +15,7 @@ def send_messages(messages):
     url = "https://api.telegram.org/bot"+token+"/sendMessage?chat_id=@"+channel_id+"&text="
 
     for el in messages:
-        message = el['title']+'\n'+el['body']
+        message =+el['time']+"\n\n" +el['title']+'\n\n'+el['body']
 
         #sending messages to group
         requests.get(url+message)
