@@ -1,16 +1,14 @@
-import json
 from bs4 import BeautifulSoup
 import requests
 import unidecode
-import json
 from datetime import datetime
+from build_url import build_url
 
 def scrape():
 
-    file_config= open('../data/config.json')
-    config = json.load(file_config)
+    url = build_url()
 
-    res = requests.get(config['url'])
+    res = requests.get(url)
         
     soup = BeautifulSoup(res.text, 'html.parser')
 

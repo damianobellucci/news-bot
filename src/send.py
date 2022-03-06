@@ -16,8 +16,8 @@ def send_messages(messages):
 
     for el in messages:
         message = el['title']+'\n'+el['body']
-        #send in timestamp order
-        time.sleep(0.2)
-        requests.get(url+message)
 
-#test
+        #sending messages to group
+        requests.get(url+message)
+        #send in timestamp order (latency)
+        time.sleep(0.2)
