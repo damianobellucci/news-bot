@@ -20,9 +20,9 @@ while True:
 
     print('scrape lunghezza',len(news))
     #obtain news only after a certaint timestamp
-    news = filter(lambda el: el['timestamp'] > last_timestamp, news)
+    news = list(filter(lambda el: el['timestamp'] > last_timestamp, news))
 
-    print('filtered',len(news))
+    #print('filtered',len(news))
 
 
     if len(news):
@@ -51,4 +51,4 @@ while True:
         print('last timestamp',last_timestamp)
 
     #wait until next iteration
-    time.sleep(20)
+    time.sleep(5*60)

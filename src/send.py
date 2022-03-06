@@ -1,4 +1,3 @@
-from scrape import scrape
 import requests
 import time
 import json
