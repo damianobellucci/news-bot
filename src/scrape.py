@@ -58,7 +58,7 @@ def scrape():
                 title=article.h2.text
             else:
                 title=article.h1.text
-            title = unidecode.unidecode(title)
+            #title = unidecode.unidecode(title)
         #some blocks in starting html could have class of articles
         except: 
             title='None title'
@@ -75,7 +75,7 @@ def scrape():
                 
             else:
                 body=article.p.text
-            body = unidecode.unidecode(body)    
+            #body = unidecode.unidecode(body)    
         except:
             #article could be without body
             body='None body'
