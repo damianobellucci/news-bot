@@ -2,3 +2,4 @@ note
 sandbox.py
 node_modules
 data
+__pycache__
